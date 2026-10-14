@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mosaic NightCare</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4c3a8f">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f6f3ff;--card:#fff;--ink:#241a45;--mute:#6b6390;--line:#e3dcf7;--ac:#6d4fd6;--acs:#ece6ff;--acink:#fff;--ok:#0f9d76;--oks:#d8f5ec;--bad:#c62828;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#120d26;--card:#1c1538;--ink:#efeaff;--mute:#a79fcb;--line:#32295a;--ac:#9b83f5;--acs:#2b2252;--acink:#120d26;--ok:#3ddcb0;--oks:#12382f}}
+:root[data-theme=dark]{--bg:#120d26;--card:#1c1538;--ink:#efeaff;--mute:#a79fcb;--line:#32295a;--ac:#9b83f5;--acs:#2b2252;--acink:#120d26;--ok:#3ddcb0;--oks:#12382f}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+main{max-width:480px;margin:0 auto;padding:14px;display:grid;gap:14px}
+h1{font-size:22px;margin:0}h2{font-size:16px;margin:0 0 4px}h3{font-size:12px;margin:14px 0 4px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.sub{color:var(--mute);font-size:13px;margin:0 0 8px}.note{color:var(--mute);font-size:12px;margin:6px 0}
+button,select,input,textarea{font:inherit;color:var(--ink)}button{cursor:pointer}
+input,select,textarea{background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:9px;width:100%;min-width:0}
+input[type=range]{padding:0}input[type=checkbox]{width:20px;height:20px}
+.btn{background:var(--ac);color:var(--acink);border:0;border-radius:14px;padding:12px 16px;font-weight:700;width:100%}
+.btn.g{background:transparent;color:var(--ink);border:1.5px solid var(--line)}.btn.s{width:auto;padding:6px 12px;font-size:13px}.btn.d{color:var(--bad);border-color:var(--bad)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.chip{border:1.5px solid var(--line);background:transparent;border-radius:99px;padding:7px 13px}.chip[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:var(--acink);font-weight:700}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}
+.step{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.step:first-of-type{border:0}.step i{font-style:normal;color:var(--mute);margin-left:auto;font-size:12px}
+.big{background:var(--acs);border-radius:16px;padding:18px;text-align:center}.big b{font-size:20px;display:block;margin-bottom:6px}
+.tm{font-size:34px;font-weight:800;text-align:center;margin:8px 0}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+#chat{max-height:230px;overflow:auto;display:grid;gap:6px;margin:8px 0}.bub{padding:8px 12px;border-radius:14px;max-width:85%}.bub.a{background:var(--acs)}.bub.u{background:var(--ac);color:var(--acink);justify-self:end}
+.ban{background:var(--oks);border-radius:14px;padding:12px;margin-bottom:2px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--acs);border-radius:12px;padding:10px;text-align:center}.stat b{font-size:22px;display:block}.stat span{font-size:11px;color:var(--mute)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}.cal div{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;font-size:12px;background:var(--line);color:var(--mute)}.cal .f{background:var(--ok);color:#fff}.cal .e{background:none}
+.gl{border-top:1px solid var(--line);padding:12px 0}.gl:first-of-type{border:0}
+.ph{display:flex;gap:8px;overflow-x:auto;margin-top:8px}.ph div{flex:none;text-align:center;font-size:11px;color:var(--mute)}.ph img{width:80px;height:100px;object-fit:cover;border-radius:10px;display:block}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}nav div{display:flex;max-width:480px;width:100%}
+nav button{flex:1;background:none;border:0;padding:9px 0 8px;font-size:11px;color:var(--mute)}nav button span{display:block;font-size:20px}nav button[aria-current=page]{color:var(--ac);font-weight:800}
+label.ck{display:flex;gap:10px;align-items:center;margin:6px 0}a.btn{display:block;text-align:center;text-decoration:none}
+.gn{position:fixed;inset:0;z-index:20;overflow:auto;background:radial-gradient(1.5px 1.5px at 20% 15%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 25%,#fff,transparent),radial-gradient(1px 1px at 40% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 70%,#fff,transparent),linear-gradient(#120d26,#2d2266);color:#efeaff;padding:calc(30px + env(safe-area-inset-top,0px)) 22px calc(30px + env(safe-area-inset-bottom,0px));text-align:center}
+.gn>div{max-width:440px;margin:0 auto}.gn .moon{font-size:64px;animation:fl 4s ease-in-out infinite}.gn h1{margin:10px 0}.gn p{font-size:17px;line-height:1.6}.gn .chip{color:#efeaff;border-color:#5a4a9a}.gn .chip[aria-pressed=true]{background:#b8a6ff;color:#120d26;border-color:#b8a6ff}.gn .btn{background:#b8a6ff;color:#120d26}
+@keyframes fl{50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.gn .moon{animation:none}}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+</style></head><body>
+<main id="app"></main><nav id="nav"></nav>
+<script>
+(function(){
+var EXPERT='https://wa.me/916230022301'; /* <-- replace with your real expert WhatsApp number or booking link */
+var KEY='nc-v1',S,tab='tonight',mood='relax',R=null,fin=null,tmr=null;
+var CAT={cleanse:{n:'Cleanse',d:'Remove makeup and cleanse your face. Rinse and pat dry.',t:2,w:60,a:'face'},treat:{n:'Treatment',d:'Apply your prescribed or selected treatment, exactly as directed by your doctor or the pack.',t:2,w:0,a:'face'},moistF:{n:'Moisturise face',d:'Smooth on your night moisturiser.',t:1,w:0,a:'face'},lip:{n:'Lip care',d:'Apply a lip balm.',t:1,w:0,a:'face'},hand:{n:'Hand cream',d:'Massage into your hands and cuticles.',t:2,w:0,a:'body'},foot:{n:'Foot care',d:'Moisturise your feet, focusing on heels and dry spots.',t:2,w:0,a:'body'},body:{n:'Body moisturiser',d:'Apply to elbows, legs or any dry areas.',t:3,w:0,a:'body'},scalp:{n:'Hair and scalp',d:'Do your scalp or hair step: massage, oil or treatment as you normally use.',t:3,w:0,a:'hair'},relax:{n:'2-minute relaxation',d:'Sit comfortably. Breathe in for 4, out for 6.',t:2,w:0,a:'all'}};
+var ORD=['cleanse','treat','moistF','lip','hand','foot','body','scalp','relax'];
+var GL=[['hyd','Face','Hydration',['cleanse','moistF']],['acne','Face','Acne management',['cleanse','treat','moistF']],['tone','Face','Uneven tone',['cleanse','treat','moistF']],['tex','Face','Texture',['cleanse','treat','moistF']],['dull','Face','Dullness',['cleanse','treat','moistF']],['lip','Face','Lip care',['lip']],['hand','Body','Dry hands',['hand']],['elb','Body','Rough elbows',['body']],['leg','Body','Dry legs',['body']],['foot','Body','Foot care',['foot']],['bh','Body','Body hydration',['body']],['scalp','Hair','Scalp care',['scalp']],['hair','Hair','Hair health',['scalp']]];
+var MOODS=[['relax','🌙','Relax'],['hydrate','💧','Hydrate'],['skin','✨','Skin'],['body','🧴','Body'],['hair','💆','Hair']];
+var P={calm:{n:'Calm and soothing',i:'🌙',d:['Lovely. Take your time.','Beautifully done. One slow breath.','Nice and gentle. Whenever you are ready.'],w:'Let that settle in for a minute. No rush.',a:'While you wait, how was your day?',f:'Night complete. Rest well. 🌙'},chat:{n:'Chatty friend',i:'💬',d:['Yesss, done! 🙌','Okay, love that for you.','Look at you go!'],w:'Give it a minute to sink in!',a:'Okay, spill. How was your day?',f:'And that is a wrap! Sleep well, you!'},fun:{n:'Fun and girly',i:'🎀',d:['Glow time! ✨','One step down! 💅','So cute. Next!'],w:'Pause a sec and let it work its magic ✨',a:'Quick, tell me the best part of your day!',f:'Night complete, gorgeous! 💖'},mind:{n:'Mindfulness',i:'🧘',d:['Notice how that feels on your skin.','Good. Stay with this step.','Feel the texture and the warmth.'],w:'Pause. Notice your breath while it settles.',a:'What is one thing you are carrying today?',f:'Routine complete. Let the day go. 🧘'},mot:{n:'Motivational',i:'⚡',d:['Step crushed! ⚡','Consistency wins. Keep going!','Another one down. You show up!'],w:'Hold for 1 minute. Patience pays off.',a:'What did you win today?',f:'Night complete. You showed up for yourself! ⚡'}};
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}if(!S||!S.goals)S=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var AC=null,amb=null,ambK='',bt=[],padG=null,VP={calm:[.85,.95],chat:[1.05,1.15],fun:[1.1,1.3],mind:[.8,.9],mot:[1.1,1.05]};
+var GM={calm:'You showed up for yourself tonight, and that matters more than any single product. Let the day go. Unclench your shoulders, soften your jaw and let your breathing slow. There is nothing left to do today. Sleep well.',chat:'And that is a wrap! You did the thing, even after a long day. Now put the phone down, get comfy and let tomorrow worry about itself. You have earned every minute of rest. Sleep well, you!',fun:'Night complete, gorgeous! Your glow is officially on its overnight shift. Fluff the pillow, dim the lights and dream something wonderful. See you tomorrow night. Sleep well!',mind:'Take one last slow breath. In through the nose, out through the mouth. Whatever the day held, you can set it down now. Feel your body being held by the bed. Sleep well.',mot:'You showed up when it would have been easier to skip, and that is how habits become who you are. Rest is part of the routine too, so recharge fully. Tomorrow, you go again. Sleep well!'};
+function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(AC.state==='suspended')AC.resume();return AC}
+function snd(){return !S||S.snd!==false}
+function tone(f,t0,d,v){var c=ac();if(!c||!snd())return;var o=c.createOscillator(),g=c.createGain(),t=c.currentTime+t0;o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
+function chime(){tone(784,0,.9,.1);tone(1175,.12,1,.07)}
+function finale(){[523,659,784,1047,1319].forEach(function(f,i){tone(f,i*.28,1.8,.09)})}
+function pad(sec){var c=ac();if(!c||!snd())return;var t=c.currentTime,g=c.createGain();g.gain.setValueAtTime(0,t);for(var k=0;k<sec/10;k++){g.gain.linearRampToValueAtTime(.035,t+k*10+4);g.gain.linearRampToValueAtTime(.01,t+k*10+10)}g.gain.linearRampToValueAtTime(0,t+sec);g.connect(c.destination);padG=g;[110,165,220].forEach(function(f){var o=c.createOscillator();o.frequency.value=f;o.connect(g);o.start(t);o.stop(t+sec+.1)})}
+function stopPad(){if(padG&&AC){try{padG.gain.cancelScheduledValues(AC.currentTime);padG.gain.setTargetAtTime(0,AC.currentTime,.2)}catch(e){}}padG=null}
+function stopAmb(){if(amb){try{amb.s.stop();if(amb.o)amb.o.stop()}catch(e){}amb=null}ambK=''}
+function noise(kind){var c=ac();if(!c)return;stopAmb();var n=c.sampleRate*2,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0),l=0,i,w;for(i=0;i<n;i++){w=Math.random()*2-1;if(kind==='ocean'){l=(l+.02*w)/1.02;d[i]=l*3.5}else d[i]=w}
+var s=c.createBufferSource();s.buffer=b;s.loop=true;var f=c.createBiquadFilter(),g=c.createGain(),m=c.createGain(),t=c.currentTime,o=null;
+if(kind==='ocean'){f.type='lowpass';f.frequency.value=500;g.gain.value=.25;o=c.createOscillator();var og=c.createGain();o.frequency.value=.1;og.gain.value=.15;o.connect(og);og.connect(g.gain);o.start()}else{f.type='bandpass';f.frequency.value=3500;f.Q.value=.4;g.gain.value=.12}
+m.gain.setValueAtTime(0,t);m.gain.linearRampToValueAtTime(1,t+3);m.gain.setValueAtTime(1,t+840);m.gain.linearRampToValueAtTime(0,t+900);
+s.connect(f);f.connect(g);g.connect(m);m.connect(c.destination);s.start();var me={s:s,o:o};amb=me;setTimeout(function(){if(amb===me)stopAmb()},905000)}
+function stopSpeech(){try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
+function speak(t,q){if(!S||S.voice===false||!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;try{if(!q)speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(String(t).replace(/[^\p{L}\p{N}\s.,!?'’-]/gu,'')),vs=speechSynthesis.getVoices().filter(function(x){return/^en/i.test(x.lang)}),v=vs.filter(function(x){return/female|samantha|zira|aria|jenny|karen|tessa|moira/i.test(x.name)})[0]||vs[0],p=VP[S.persona]||[1,1];if(v)u.voice=v;u.rate=p[0];u.pitch=p[1];speechSynthesis.speak(u)}catch(e){}}
+function breatheCues(){bt.forEach(clearTimeout);bt=[];for(var k=0;k<12;k++){(function(k){bt.push(setTimeout(function(){var z=$('bz');if(z)z.textContent='Breathe in…';speak('Breathe in')},k*10000));bt.push(setTimeout(function(){var z=$('bz');if(z)z.textContent='And out, slowly…';speak('And out, slowly')},k*10000+4000))})(k)}}
+function ctl(){return'<div class="chips"><button class="chip" data-a="snd" aria-pressed="'+snd()+'">🔊 Sounds</button><button class="chip" data-a="voice" aria-pressed="'+(S.voice!==false)+'">🗣 Voice</button></div>'}
+
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function back(n){var d=new Date();d.setDate(d.getDate()-n);return d}
+function gl(id){return GL.filter(function(g){return g[0]===id})[0]}
+function build(m,min){var set={};S.goals.forEach(function(id){var g=gl(id);if(g)g[3].forEach(function(s){set[s]=1})});
+var ids=ORD.filter(function(s){return set[s]&&s!=='relax'});
+var f=ids.filter(function(s){var a=CAT[s].a;return m==='relax'||(m==='hydrate'&&s!=='treat')||(m==='skin'&&a==='face')||(m==='body'&&a==='body')||(m==='hair'&&a==='hair')});
+if(!f.length)f=ids;if(min)return f.filter(function(s){return s!=='treat'}).slice(0,3);return f.concat('relax')}
+function mins(a){return a.reduce(function(t,s){return t+CAT[s].t},0)}
+function monthN(){var p=key(new Date()).slice(0,7);return Object.keys(S.nights).filter(function(k){return k.slice(0,7)===p}).length}
+function nav(){var T=[['tonight','🌙','Tonight'],['goals','🎯','Goals'],['progress','📈','Progress'],['plan','🧴','Plan']];$('nav').innerHTML=(S&&!R)?'<div>'+T.map(function(t){return'<button data-a="tab" data-v="'+t[0]+'"'+(tab===t[0]?' aria-current="page"':'')+'><span>'+t[1]+'</span>'+t[2]+'</button>'}).join('')+'</div>':''}
+function onboard(){var gs=['Face','Body','Hair'].map(function(a){return'<h3>'+a+'</h3>'+GL.filter(function(g){return g[1]===a}).map(function(g){return'<label class="ck"><input type="checkbox" class="og" value="'+g[0]+'"> '+g[2]+'</label>'}).join('')}).join('');
+return'<div class="card"><h1>Mosaic NightCare 🌙</h1><p class="sub">A night-time companion that helps you actually finish your routine. Everything stays on this device.</p><label class="note" for="on">Your first name</label><input id="on" maxlength="30" autocomplete="off"><h3>What do you want to work on?</h3>'+gs+'<h3>Companion style</h3><select id="op">'+Object.keys(P).map(function(k){return'<option value="'+k+'">'+P[k].i+' '+P[k].n+'</option>'}).join('')+'</select><h3>Usual night time</h3><input id="ot" type="time" value="21:30"><p class="note">Set a phone alarm for this time. The app cannot send reminders by itself yet.</p><button class="btn" data-a="start" style="margin-top:8px">Start</button></div>'}
+function tonight(){var done=!!S.nights[key(new Date())],miss=!done&&Object.keys(S.nights).length>0&&!S.nights[key(back(1))];
+if(fin){var ch=function(k,l){return'<button class="chip" data-a="amb" data-v="'+k+'" aria-pressed="'+(ambK===k)+'">'+l+'</button>'};return'<div class="gn" role="dialog" aria-modal="true" aria-label="Good night"><div><div class="moon">🌙</div><h1>Good night, '+esc(S.name)+'</h1><p>'+esc(GM[S.persona]||GM.calm)+'</p><p class="note" style="color:#c9bfff">'+fin.m+' minutes for yourself · '+monthN()+' night'+(monthN()===1?'':'s')+' this month</p><h3 style="color:#c9bfff">Wind-down sound</h3><div class="chips" style="justify-content:center">'+ch('rain','🌧️ Soft rain')+ch('ocean','🌊 Ocean')+ch('off','🔇 Silence')+'</div><p class="note" style="color:#c9bfff">Sounds fade out after 15 minutes.</p><button class="btn" data-a="finok" style="margin-top:8px">Good night 🌙</button></div></div>'}
+var ss=build(mood,false);
+return'<div><h1>Ready for your night, '+esc(S.name)+'?</h1><p class="sub">Let\'s take 15 minutes for you.</p></div>'+ctl()+(amb?'<div class="ban">🎧 Sound playing <button class="btn g s" data-a="amb" data-v="off">Stop</button></div>':'')+(miss?'<div class="ban"><b>It\'s okay. Let\'s restart tonight.</b><br>Try the 5-minute minimum, no pressure.</div>':'')+(done?'<div class="ban">✓ Tonight is already done. You can still do another round.</div>':'')+
+'<section class="card"><h2>How do you feel like tonight?</h2><div class="chips">'+MOODS.map(function(m){return'<button class="chip" data-a="mood" data-v="'+m[0]+'" aria-pressed="'+(mood===m[0])+'">'+m[1]+' '+m[2]+'</button>'}).join('')+'</div><h3>Tonight\'s routine · about '+mins(ss)+' min</h3>'+ss.map(function(s){return'<div class="step">☐ '+CAT[s].n+'<i>'+CAT[s].t+' min</i></div>'}).join('')+'<button class="btn" data-a="go" style="margin-top:12px">Begin tonight\'s routine</button><button class="btn g" data-a="gomin" style="margin-top:8px">Short on time? 5-minute minimum</button></section>'}
+function runner(){var s=CAT[R.ids[R.i]],n=R.ids.length,p=P[S.persona];
+var body=R.wait?'<div class="tm" id="tm">1:00</div><p class="sub" style="text-align:center">'+esc(p.w)+'</p><button class="btn" data-a="next">Next step →</button>':
+'<h2>'+esc(s.n)+'</h2><p>'+esc(s.d)+'</p>'+(R.ids[R.i]==='relax'?'<div class="tm" id="tm">2:00</div><p class="sub" id="bz" style="text-align:center;min-height:20px"></p><button class="btn g" data-a="breathe" style="margin-bottom:8px">Start 2-minute breathing</button>':'')+'<button class="btn" data-a="done">Done ✓</button>';
+return'<section class="card"><div class="row" style="margin-top:0"><span class="note" style="margin:0">Step '+(R.i+1)+' of '+n+'</span><button class="btn g s" data-a="quit">End</button></div><div class="bar"><i style="width:'+(R.i/n*100)+'%"></i></div>'+ctl()+'<div style="margin-top:12px">'+body+'</div></section><section class="card"><h2>'+p.i+' '+p.n+'</h2><div id="chat">'+R.chat.map(function(c){return'<div class="bub '+c[0]+'">'+esc(c[1])+'</div>'}).join('')+'</div><div class="row"><input id="ci" placeholder="Talk to me while you wait..." maxlength="200" aria-label="Message"><button class="btn s" data-a="send">Send</button></div><p class="note">Scripted companion, not a doctor. For skin problems that are painful or persistent, see a professional.</p></section>'}
+function say(w,t){if(w==='a')speak(t);R.chat.push([w,t]);var c=$('chat');if(c){c.insertAdjacentHTML('beforeend','<div class="bub '+w+'">'+esc(t)+'</div>');c.scrollTop=c.scrollHeight}}
+function clock(sec,cb){clearInterval(tmr);var e=$('tm'),t=sec;function u(){if(e)e.textContent=Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}u();tmr=setInterval(function(){t--;u();if(t<=0){clearInterval(tmr);if(cb)cb()}},1000)}
+function days(g){var st=S.gs[g]||key(new Date()),sd=new Date(st+'T00:00:00'),el=Math.min(30,Math.floor((new Date()-sd)/864e5)+1),c=0,steps=gl(g)[3];
+Object.keys(S.nights).forEach(function(k){if(k>=st&&steps.every(function(x){return S.nights[k].steps.indexOf(x)>-1}))c++});return[Math.min(c,30),Math.max(el,1)]}
+function goals(){var g=S.goals.map(function(id){var o=gl(id),d=days(id),r=o[3].map(function(s){return CAT[s].n}).join(' → ');return'<div class="gl"><div class="row" style="margin:0"><b>🎯 30-Day '+o[2]+' Goal</b><button class="btn g s d" data-a="rg" data-v="'+id+'">Remove</button></div><p class="sub" style="margin:4px 0">Nights completed: '+d[0]+'/30 · Consistency '+Math.round(d[0]/d[1]*100)+'%</p><div class="bar"><i style="width:'+d[0]/30*100+'%"></i></div><p class="note">Your routine: '+r+'</p></div>'}).join('');
+var add=['Face','Body','Hair'].map(function(a){var o=GL.filter(function(x){return x[1]===a&&S.goals.indexOf(x[0])<0});return o.length?'<h3>'+a+'</h3><div class="chips">'+o.map(function(x){return'<button class="chip" data-a="ag" data-v="'+x[0]+'">+ '+x[2]+'</button>'}).join('')+'</div>':''}).join('');
+return'<h1>Your goals</h1><section class="card">'+(g||'<p class="sub">No goals yet. Add one below.</p>')+'</section><section class="card"><h2>Add a goal</h2>'+add+'</section>'}
+function progress(){var m=new Date(),dim=new Date(m.getFullYear(),m.getMonth()+1,0).getDate(),c='';'SMTWTFS'.split('').forEach(function(x){c+='<div class="e">'+x+'</div>'});for(var i=0;i<new Date(m.getFullYear(),m.getMonth(),1).getDay();i++)c+='<div class="e"></div>';
+for(var d=1;d<=dim;d++){var k=key(new Date(m.getFullYear(),m.getMonth(),d));c+='<div class="'+(S.nights[k]?'f':'')+'">'+d+'</div>'}
+var tot=Object.keys(S.nights).length,tm=0;Object.keys(S.nights).forEach(function(k){tm+=S.nights[k].mins});
+var ck=S.checks,f=ck[0],l=ck[ck.length-1];
+return'<h1>Progress</h1><section class="card"><div class="stats"><div class="stat"><b>'+monthN()+'</b><span>Nights this month</span></div><div class="stat"><b>'+tot+'</b><span>Total nights</span></div><div class="stat"><b>'+tm+'</b><span>Minutes for you</span></div></div><div class="cal">'+c+'</div></section>'+
+'<section class="card"><h2>Weekly check-in</h2><p class="sub">Once a week is plenty. Rate how things feel, and add a photo if you like.</p><label class="note" for="cd">Dryness: <b id="cdv">5</b>/10 (10 = very dry)</label><input id="cd" type="range" min="1" max="10" value="5"><label class="note" for="cc">Comfort: <b id="ccv">5</b>/10 (10 = very comfortable)</label><input id="cc" type="range" min="1" max="10" value="5"><label class="note" for="cp">Photo (optional)</label><input id="cp" type="file" accept="image/*"><button class="btn" data-a="chk" style="margin-top:10px">Save check-in</button>'+
+(ck.length>1?'<p style="margin-top:10px"><b>Dryness '+f.d+'/10 → '+l.d+'/10 · Comfort '+f.c+'/10 → '+l.c+'/10</b></p>':'')+(ck.length?'<div class="ph">'+ck.map(function(x,i){return'<div>'+(x.p?'<img src="'+x.p+'" alt="Week '+(i+1)+' photo">':'')+'Week '+(i+1)+'<br>D '+x.d+' · C '+x.c+'</div>'}).join('')+'</div>':'')+'<p class="note">These are your own ratings, not a skin diagnosis.</p></section>'}
+function plan(){var ss=build('relax',false),sum='Hi Mosaic, my NightCare goals: '+S.goals.map(function(g){return gl(g)[2]}).join(', ')+'. I need help choosing products.';
+return'<h1>Your NightCare plan</h1><section class="card"><div class="step">1️⃣ <b>Understand</b><i>your goals</i></div><div class="step">2️⃣ <b>Routine</b><i>'+ss.map(function(s){return CAT[s].n}).join(' → ')+'</i></div><div class="step">3️⃣ <b>Products</b><i>with guidance</i></div><div class="step">4️⃣ <b>Expert</b><i>weekly check-in</i></div><p class="sub" style="margin-top:10px">Need help choosing a product? Talk to a Mosaic expert.</p><a class="btn" target="_blank" rel="noopener" href="'+EXPERT+'?text='+encodeURIComponent(sum)+'">Talk to a Mosaic expert</a></section>'+
+'<section class="card"><h2>Settings</h2><label class="note" for="sn">Name</label><input id="sn" value="'+esc(S.name)+'" maxlength="30"><label class="note" for="sp">Companion style</label><select id="sp">'+Object.keys(P).map(function(k){return'<option value="'+k+'"'+(S.persona===k?' selected':'')+'>'+P[k].i+' '+P[k].n+'</option>'}).join('')+'</select><label class="note" for="st">Usual night time (set a phone alarm)</label><input id="st" type="time" value="'+esc(S.time)+'"><button class="btn" data-a="sset" style="margin-top:10px">Save settings</button></section>'+
+'<section class="card"><h2>Backup</h2><p class="sub">Data lives only on this device. Copy it somewhere safe or paste one to restore.</p><textarea id="bk" rows="3" aria-label="Backup"></textarea><div class="row"><button class="btn g s" data-a="exp">Show backup</button><button class="btn s" data-a="imp">Restore</button><button class="btn g d s" data-a="reset">Reset all</button></div></section>'}
+function render(){clearInterval(tmr);bt.forEach(clearTimeout);bt=[];stopPad();nav();var h=!S?onboard():R?runner():tab==='tonight'?tonight():tab==='goals'?goals():tab==='progress'?progress():plan();$('app').innerHTML=h;window.scrollTo(0,0);
+if(R&&R.wait)clock(60,function(){tone(660,0,1.2,.08)});}
+function begin(min){R={ids:build(mood,min),i:0,wait:false,chat:[],asked:false,t0:Date.now(),min:min};R.chat.push(['a',P[S.persona].i+' Let\'s begin. '+CAT[R.ids[0]].n+' first.']);render();chime();speak('Let\'s begin. '+CAT[R.ids[0]].n+' first.')}
+function advance(){R.i++;R.wait=false;if(R.i>=R.ids.length){var m=Math.max(1,Math.round((Date.now()-R.t0)/60000)),k=key(new Date()),o=S.nights[k]||{mins:0,steps:[],min:false};o.mins+=m;o.steps=o.steps.concat(R.ids.filter(function(x){return o.steps.indexOf(x)<0}));o.min=R.min;S.nights[k]=o;save();fin={m:m,t:P[S.persona].f};R=null;finale();speak('Good night, '+S.name+'. '+(GM[S.persona]||GM.calm))}else{speak('Next, '+CAT[R.ids[R.i]].n+'.',true)}render()}
+function readImg(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement('canvas'),w=240,h=Math.round(im.height*w/im.width);c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);cb(c.toDataURL('image/jpeg',.6))};im.onerror=function(){cb('')};im.src=r.result};r.onerror=function(){cb('')};r.readAsDataURL(f)}
+function reply(t){var l=t.toLowerCase(),p=P[S.persona];if(/tired|stress|bad|hard|sad|anx|long|rough|worr/.test(l))return p.i+' That sounds like a lot. You are taking time for yourself now, and that counts.';if(/good|great|happy|fun|best|win|nice|love/.test(l))return p.i+' Love that. Hold onto that feeling tonight.';return p.i+' Thanks for sharing. I am here while you finish your routine.'}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a,v=b.dataset.v;
+if(a==='tab'){tab=v;fin=null;render();return}
+if(a==='mood'){mood=v;render();return}
+if(a==='start'){var gs=[].slice.call(document.querySelectorAll('.og:checked')).map(function(c){return c.value});if(!gs.length){alert('Pick at least one goal to begin.');return}S={name:$('on').value.trim()||'there',goals:gs,persona:$('op').value,time:$('ot').value||'21:30',nights:{},checks:[],gs:{}};gs.forEach(function(g){S.gs[g]=key(new Date())});save();render();return}
+if(!S)return;
+if(a==='snd'){S.snd=!snd();save();render();return}
+if(a==='voice'){S.voice=S.voice===false;save();if(S.voice===false)stopSpeech();render();return}
+if(a==='amb'){if(v==='off')stopAmb();else{noise(v);ambK=v}render();return}
+if(a==='go'){begin(false);return}if(a==='gomin'){begin(true);return}
+if(a==='finok'){fin=null;stopSpeech();render();return}
+if(a==='quit'){if(confirm('End tonight\'s routine? Progress so far will not be saved.')){R=null;stopSpeech();render()}return}
+if(a==='done'){var s=CAT[R.ids[R.i]],p=P[S.persona];chime();say('a',p.d[R.i%3]);if(s.w&&!R.min){R.wait=true;speak(p.w,true);if(!R.asked){R.asked=true;R.chat.push(['a',p.a]);speak(p.a,true)}render();}else advance();return}
+if(a==='next'){advance();return}
+if(a==='breathe'){pad(120);breatheCues();clock(120,function(){bt.forEach(clearTimeout);bt=[];chime();say('a','Lovely. Take one more slow breath, then tap Done.')});return}
+if(a==='send'){var i=$('ci'),t=i.value.trim();if(!t)return;i.value='';say('u',t);setTimeout(function(){if(R)say('a',reply(t))},600);return}
+if(a==='ag'){S.goals.push(v);S.gs[v]=key(new Date())}
+else if(a==='rg'){if(S.goals.length<2){alert('Keep at least one goal.');return}S.goals=S.goals.filter(function(g){return g!==v})}
+else if(a==='chk'){var ent={d:+$('cd').value,c:+$('cc').value,p:'',t:key(new Date())},f=$('cp').files[0];if(f){readImg(f,function(u){ent.p=u;S.checks.push(ent);save();render()});return}S.checks.push(ent)}
+else if(a==='sset'){S.name=$('sn').value.trim()||S.name;S.persona=$('sp').value;S.time=$('st').value||S.time}
+else if(a==='exp'){$('bk').value=JSON.stringify(S);$('bk').select();return}
+else if(a==='imp'){try{var j=JSON.parse($('bk').value);if(!j.goals||!j.nights)throw 0;if(!confirm('Replace current data with this backup?'))return;S=j}catch(x){alert('That backup could not be read.');return}}
+else if(a==='reset'){if(!confirm('Erase everything on this device?'))return;S=null;try{localStorage.removeItem(KEY)}catch(x){}render();return}
+save();render()});
+document.addEventListener('input',function(e){if(e.target.id==='cd')$('cdv').textContent=e.target.value;if(e.target.id==='cc')$('ccv').textContent=e.target.value});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='ci'){e.preventDefault();var b=document.querySelector('[data-a=send]');if(b)b.click()}});
+render();
+if('serviceWorker' in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
+})();
+</script></body></html>
